@@ -22,7 +22,11 @@
         android:layout_toEndOf="@+id/etMessage"
         android:layout_toRightOf="@+id/etMessage"
         android:layout_alignParentBottom="true"
-        android:text="@string/send" />
+        android:text="@string/send"
+        android:elevation="10dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+
+        />
 
     <ScrollView
         android:id="@+id/scrollView"

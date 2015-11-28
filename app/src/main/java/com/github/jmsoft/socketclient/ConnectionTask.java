@@ -16,6 +16,10 @@ import socketclient.lg.com.socketclient.R;
  */
 public class ConnectionTask extends AsyncTask<Void, String, Void> {
 
+    public Socket getsSocket() {
+        return sSocket;
+    }
+
     //Socket for connecting the client to server
     private Socket sSocket;
     private InetAddress ia;
@@ -32,10 +36,26 @@ public class ConnectionTask extends AsyncTask<Void, String, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        return null;
+        try {
+            sSocket = new Socket(ia, mPort);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        publishProgress(context.getString(R.string.connected_to_server));
+
+        while(true) {
+            try {
+                DataInputStream dis = new DataInputStream(sSocket.getInputStream());
+
+                final String readInput = dis.readUTF();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     protected void onProgressUpdate(String... values) {
+        tvText.setText(tvText.getText().toString() + "\n" + values[0]);
     }
 }
